@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Response</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        text-align: center;
+      }
+      img {
+        width: 70%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="Success.gif" alt="Success GIF">
+      <h1>Login Successful</h1>
+      <p>Welcome, <%= username %>!</p>
+      <a href="/table">User Details</a>
+    </div>
+  </body>
+</html>

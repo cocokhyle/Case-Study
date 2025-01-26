@@ -1,0 +1,19 @@
+# Web Application Service Monitor
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    release: prometheus-operator
+  name: webapp
+  namespace: monitoring
+spec:
+  endpoints:
+  - path: /metrics
+    port: web
+    targetPort: 3000
+  namespaceSelector:
+    matchNames:
+    - webapp
+  selector:
+    matchLabels:
+      app: webapp-service

@@ -1,0 +1,56 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: webapp-alertmanager-config
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: "webapp-alerts"
+spec:
+  route:
+    groupBy: ["alertname"]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 5m
+    receiver: "default_receiver"
+    routes:
+      - matchers:
+          - name: alertname
+            value: HighDowntime|High5xxErrorRate|TestAlert
+            regex: true
+        receiver: "critical_alerts_email"
+      - matchers:
+          - name: alertname
+            value: HighCPUUsage|HighMemoryUsage|High4xxErrorRate
+            regex: true
+        receiver: "warning_alerts_email"
+  receivers:
+    - name: "critical_alerts_email"
+      emailConfigs:
+        - to: "villasorv@gmail.com"
+          from: "rencecura11@gmail.com"
+          smarthost: "smtp.gmail.com:587"
+          authUsername: "rencecura11@gmail.com"
+          authPassword:
+            name: gmail-auth
+            key: password
+          authIdentity: "rencecura11@gmail.com"
+    - name: "warning_alerts_email"
+      emailConfigs:
+        - to: "villasorv@gmail.com"
+          from: "rencecura11@gmail.com"
+          smarthost: "smtp.gmail.com:587"
+          authUsername: "rencecura11@gmail.com"
+          authPassword:
+            name: gmail-auth
+            key: password
+          authIdentity: "rencecura11@gmail.com"
+    - name: "default_receiver"
+      emailConfigs:
+        - to: "villasorv@gmail.com"
+          from: "rencecura11@gmail.com"
+          smarthost: "smtp.gmail.com:587"
+          authUsername: "rencecura11@gmail.com"
+          authPassword:
+            name: gmail-auth
+            key: password
+          authIdentity: "rencecura11@gmail.com"

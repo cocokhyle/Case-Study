@@ -1,0 +1,14 @@
+config:
+  target: "http://139.162.49.20:32000"
+  phases:
+    - duration: 30
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - post:
+          url: "/login"
+          formData:
+            email: "ricky@example.com"
+            password: "password123"
+      - get:
+          url: "/table"

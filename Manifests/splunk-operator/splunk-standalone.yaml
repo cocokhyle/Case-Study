@@ -1,0 +1,21 @@
+apiVersion: enterprise.splunk.com/v4
+kind: Standalone
+metadata:
+  name: s1
+  namespace: splunk-operator
+  finalizers:
+  - enterprise.splunk.com/delete-pvc
+spec:
+  etcVolumeStorageConfig:
+    storageCapacity: 10Gi
+  varVolumeStorageConfig:
+    storageCapacity: 30Gi
+  serviceTemplate:
+    spec:
+      type: NodePort
+  startupProbe:
+    initialDelaySeconds: 300
+    periodSeconds: 10
+    failureThreshold: 30
+  livenessInitialDelaySeconds: 400
+  readinessInitialDelaySeconds: 390

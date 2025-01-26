@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-splunk-standalone-standalone-service-nodeport
+  namespace: splunk-operator
+spec:
+  type: NodePort
+  ports:
+    - name: http-splunkweb
+      port: 8000
+      targetPort: 8000
+      nodePort: 32093   
+    - name: http-hec
+      port: 8088
+      targetPort: 8088
+      nodePort: 32094   
+    - name: https-splunkd
+      port: 8089
+      targetPort: 8089
+      nodePort: 32095   
+    - name: tcp-s2s
+      port: 9997
+      targetPort: 9997
+      nodePort: 32096     
+  selector:
+    app.kubernetes.io/component: standalone
+    app.kubernetes.io/instance: splunk-splunk-standalone-standalone
+    app.kubernetes.io/managed-by: splunk-operator
+    app.kubernetes.io/name: standalone
+    app.kubernetes.io/part-of: splunk-splunk-standalone-standalone
